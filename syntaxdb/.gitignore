@@ -1,0 +1,9 @@
+dist
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+
+.yarn/cache
+.yarn/unplugged
+.yarn/install-state.gz
