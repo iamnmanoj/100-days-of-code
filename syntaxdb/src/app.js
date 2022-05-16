@@ -19,7 +19,7 @@ import { ViewManager } from './view';
 export class App {
     #eventManager;
     #viewManager;
-    #language;
+    #language = 'javascript';
     #serviceLayer;
 
     constructor(root) {
@@ -37,18 +37,16 @@ export class App {
     #initEvents() {
         this.#eventManager.on('languageChange', (language) => this.#onLanguageChange(language));
         this.#eventManager.on('conceptChange');
-        this.#eventManager.on('loadCategory', this.getCategories);
-        this.#eventManager.on('loadConcepts', this.getCategories);
+        this.#eventManager.on('loadCategories', () => this.getCategoriesByLanguage());
     }
-
-    getCategories() { }
 
     #onLanguageChange(language) {
         this.#language = language;
     }
 
-    getCategoriesByLanguage() {
-        const language = this.#language
+    async getCategoriesByLanguage() {
+        const categories = await this.#serviceLayer.fetchCategoriesByLanguage(this.#language);
+        this.#eventManager.dispatch('loadCategoriesCompleted', categories)
     }
 
     getConceptsByLanguage() {

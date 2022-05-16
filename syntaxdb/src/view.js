@@ -27,26 +27,28 @@ export class ViewManager {
     #initEvents() {
         this.#eventManager.on('conceptChange', () => this.onConceptChange());
         this.#eventManager.on('categoryChange', () => this.toggleCategory());
+        this.#eventManager.on('loadCategoriesCompleted', (data) => this.renderCategories(data))
     }
 
     addAppToRoot() {
-        this.#root.appendChild(this.#$.container)
-        this.renderAppInContainer();
-    }
-
-    renderAppInContainer() {
-        this.renderCategory()
-        this.renderConceptDescription();
-    }
-
-    renderCategory() {
         this.#$.category.textContent = 'Category';
+        this.#$.conceptDescription.textContent = 'Descsription';
+        this.#root.appendChild(this.#$.container)
         this.#$.container.appendChild(this.#$.category);
+        this.#$.container.appendChild(this.#$.conceptDescription);
+        this.#eventManager.dispatch('loadCategories');
+    }
+
+    renderCategories(categories) {
+        categories.forEach(({ category_name }) => {
+            const elem = createElement('div', { id: 'categories' });
+            elem.textContent = category_name;
+            this.#$.category.appendChild(elem);
+        });
     }
 
     renderConceptDescription() {
-        this.#$.conceptDescription.textContent = 'Descsription';
-        this.#$.container.appendChild(this.#$.conceptDescription);
+
     }
 
     onConceptChange() {
