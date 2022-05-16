@@ -1,1 +1,34 @@
-<mxfile host="app.diagrams.net" modified="2022-05-12T15:52:09.299Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36 Edg/101.0.1210.39" etag="5-c5MBKZsvxFzR7DC0G0" version="18.0.3" type="device"><diagram id="PRYMu3ZTZrPaFRH0uspt" name="Page-1">1VfbctsgEP0aPyYjCStJHy07vUzTaWfcNpNHLK0lphhUhG/9+i4CXXEmadpO3SfBAXbh7IFdTch8c3ijaFl8kBnwSRRkhwlZTKIoDMgNfgxytEh8HVogVyxzkzpgyX5As9KhW5ZBNZiopeSalUMwlUJAqgcYVUruh9PWkg+9ljQHD1imlPvoPct0YdGbOOjwt8DyovEcBm5kQ5vJDqgKmsl9DyK3EzJXUmrb2hzmwA15DS923etHRtuNKRD6OQvyB3o3Y8kqSS6+3r/PtU4/0gtnZUf51h34yzu3XX1sONgXTMOypKnp7zHOE5IUesOxF2KTVqVlfs0OgM4SZxOUhsOjmw1bClA7IDeg1RGntMJxrDnZtCzue0FwUNHjv8GoC3veWu6YwYYj5xeIijyiZmWJwJ3MWXoOjLUMnQtjxGNsQTVFU0tQO4bMnAFpZBqfF2lTjzSPJhDZzDxs2Es5rSqUH0kqTZX24R59Sm5FZnhbBC13kHmP34g59Cy3KoWnnxDcQA76qRvkR6LHdHyC6QZTwKlmu+F2T9HvPHySDA/SBno6ek9INIqgPaZb1X9Fx4bi0TW7HhmyPHiGajW0x365QOL/TyDRMwVC/qVAyDjhxK8u45dJhEyfNPWXRXJ1QiRXHAlLVgOpXH3fmuojWUuhL6q69prhhDAuD7UEmnFs5eb7uWCVOUWd+bDi0pQJA2DkAk6PoKrWj2rWNAgeZNVg4SUuMIWGXWWCXLC0MKY5NyVbFGyrGkeCQNFUMylO2I6MHZuHuc3DnsHeLlOpoDdTro0oC2gONDZOjHGTsu6syS5veU5KJXd1mYoFJk0ZZ5rqusdEO8pE3vrL6kQ4uraYxfTwRlZayW8wl1wqRIQUYGLFOB9BlLNcYJfD2lgwGZFhBTtz8IZlmXGSnEqwp279b6XUsfj9hHr9hzIqdrvq2V6d7h+E3P4E</diagram></mxfile>
+<mxfile host="65bd71144e">
+    <diagram id="PRYMu3ZTZrPaFRH0uspt" name="Page-1">
+        <mxGraphModel dx="1110" dy="551" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-1" value="UI/View" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="220" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-2" value="App Logic" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="220" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-3" value="Data/Service" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="345" y="220" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-4" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" source="gYaLAiBbBB-VWKgttcOa-1" target="gYaLAiBbBB-VWKgttcOa-2" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="320" as="sourcePoint"/>
+                        <mxPoint x="450" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-5" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" source="gYaLAiBbBB-VWKgttcOa-2" target="gYaLAiBbBB-VWKgttcOa-3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="300" y="259.5" as="sourcePoint"/>
+                        <mxPoint x="340" y="259.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="gYaLAiBbBB-VWKgttcOa-6" value="&lt;b style=&quot;font-size: 15px;&quot;&gt;This app contains 3 layers&lt;br&gt;&lt;/b&gt;1. UI layer which allows user interactions&lt;br&gt;2. App logic layer which contains core logic of the app&lt;br&gt;3. DataLayer/Service layer which provides facilitates in providing the data" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="780" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
