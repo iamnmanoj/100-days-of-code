@@ -18,4 +18,29 @@ export class ServiceLayer {
         const response = await this.#fetchData(`${language}/categories/${id}/concepts`, requestOptions);
         return response.json();
     }
+
+    async fetchAllConceptsByLanguage(language) {
+        const response = await this.#fetchData(`languages/${language}/concepts`, requestOptions);
+        const concepts = response.json();
+        return concepts ? this.normaliseConcepts(response.json()) : {};
+    }
+
+    normaliseConcepts(concepts) {
+        concepts.forEach((concept) => {
+            if (normalisedConcepts[concept.category_id] === undefined) {
+                normalisedConcepts[concept.category_id] = concept
+            } else {
+                normalisedConcepts[concept.category_id].push(concept)
+            }
+        });
+
+        return normalisedConcepts;
+    }
+
+    normaliseCategories(categories) {
+        return categories.reduce((acc, category) => {
+            acc[category.id] = category;
+            return acc;
+        }, {})
+    }
 }

@@ -1,50 +1,54 @@
 import '../style.css'
 import { ServiceLayer } from './service-client';
 import { EventManager } from './event-manager';
+import { ViewManager } from './view';
 
 
-const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
+// const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
 
-async function test() {
-    const response = await serviceClient.fetchCategoriesByLanguage('javascript');
-    console.log(response);
+// async function test() {
+//     const response = await serviceClient.fetchCategoriesByLanguage('javascript');
+//     console.log(response);
 
-    const response1 = await serviceClient.fetchConceptsByLanguageAndId('javascript', '33');
-    console.log(response1);
-}
+//     const response1 = await serviceClient.fetchConceptsByLanguageAndId('javascript', '33');
+//     console.log(response1);
+// }
 
-test();
+// test();
 
 export class App {
-    #containerElement = document.createElement('div');
     #eventManager;
+    #viewManager;
     #language;
+    #serviceLayer;
 
-    constructor(eventManager) {
+    constructor(root) {
         this.#eventManager = new EventManager();
+        this.#viewManager = new ViewManager(this.#eventManager, root);
+        this.#serviceLayer = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
     }
 
     boot() {
-        this.#initEvents()
+        this.#initEvents();
+        this.#eventManager.dispatch('uiboot');
+        this.#eventManager.dispatch('loadConcepts');
     }
 
     #initEvents() {
         this.#eventManager.on('languageChange', (language) => this.#onLanguageChange(language));
         this.#eventManager.on('conceptChange');
+        this.#eventManager.on('loadCategory', this.getCategories);
+        this.#eventManager.on('loadConcepts', this.getCategories);
     }
+
+    getCategories() { }
 
     #onLanguageChange(language) {
         this.#language = language;
     }
-    
-    #onConceptChange() { }
-
-    renderContainer() {
-
-    }
 
     getCategoriesByLanguage() {
-
+        const language = this.#language
     }
 
     getConceptsByLanguage() {
@@ -52,6 +56,4 @@ export class App {
     }
 }
 
-new App().boot();
-
-
+new App(document.querySelector('#app')).boot();
