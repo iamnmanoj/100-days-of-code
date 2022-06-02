@@ -40,11 +40,12 @@ export class ViewManager {
     }
 
     renderCategories(categories) {
-        categories.forEach(({ category_name }) => {
-            const elem = createElement('div', { id: 'categories' });
-            elem.textContent = category_name;
+        for (let key in categories) {
+            const category = categories[key];
+            const elem = createElement('div', { id: category.id });
+            elem.textContent = category.category_name;
             this.#$.category.appendChild(elem);
-        });
+        }
     }
 
     renderConceptDescription() {

@@ -10,8 +10,9 @@ export class ServiceLayer {
     }
 
     async fetchCategoriesByLanguage(language, requestOptions) {
-        const response = await this.#fetchData(`${language}/categories`, requestOptions);
-        return response.json();
+        let response = await this.#fetchData(`${language}/categories`, requestOptions);
+        response = await response.json();
+        return this.normaliseCategories(response);
     }
 
     async fetchConceptsByLanguageAndId(language, id, requestOptions) {
@@ -39,7 +40,7 @@ export class ServiceLayer {
 
     normaliseCategories(categories) {
         return categories.reduce((acc, category) => {
-            acc[category.id] = category;
+            acc[category.category_name] = category;
             return acc;
         }, {})
     }

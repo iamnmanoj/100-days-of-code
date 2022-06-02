@@ -1,16 +1,16 @@
 export class EventManager {
     #events = new Map();
 
-    on(name, subscriber) {
-        const subscribers = this.#events.get(name) || [];
-        subscribers.push(subscriber)
-        this.#events.set(name, subscribers);
+    on(eventName, eventHandler) {
+        const subscribers = this.#events.get(eventName) || [];
+        subscribers.push(eventHandler)
+        this.#events.set(eventName, subscribers);
     }
 
-    dispatch(name, data) {
-        const subscribers = this.#events.get(name);
+    dispatch(eventName, data) {
+        const subscribers = this.#events.get(eventName);
         if (subscribers) {
-            subscribers.forEach(subscriber => subscriber(data))
+            subscribers.forEach(eventHandler => eventHandler(data))
         }
     }
 
