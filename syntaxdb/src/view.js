@@ -1,15 +1,18 @@
 import { createElement } from './utils';
+import { Collapsible } from './custom-elements';
 
 export class ViewManager {
 
     #root;
 
     #$ = {
-        container: createElement('div', { class: 'container' }),
-        category: createElement('div', { 'class': 'category' }),
+        container: createElement('div', { class: 'root' }),
+        category: createElement('div', { 'class': 'categoryContainer' }),
         concepts: document.createElement('div', { 'class': 'concepts' }),
         conceptDescription: document.createElement('div', { 'class': 'conceptDescription' })
     }
+
+    #renderItems = undefined;
 
     #eventManager;
 
@@ -26,8 +29,8 @@ export class ViewManager {
 
     #initEvents() {
         this.#eventManager.on('conceptChange', () => this.onConceptChange());
-        this.#eventManager.on('categoryChange', () => this.toggleCategory());
-        this.#eventManager.on('loadCategoriesCompleted', (data) => this._onCategoriesLoadCompleted(data))
+        this.#eventManager.on('loadCategoriesCompleted', (data) => this._onCategoriesLoadCompleted(data));
+        this.#eventManager.on('loadConceptCompleted', (data) => this._onConceptsLoadCompleted(data))
     }
 
     addAppToRoot() {
@@ -46,18 +49,29 @@ export class ViewManager {
     }
 
     renderCategory(category) {
-        const elem = createElement('div', { id: category.id });
-        this.attachClickEventToElement(this._onCategoryClick)
-        elem.textContent = category.category_name;
-        this.#$.category.appendChild(elem);
+        const props = {
+            root: this.#$.category,
+            onClick: this.getItems,
+            onCollapse: () => { },
+            label: category.category_name,
+            id: category.id
+        };
+        new Collapsible(props);
+        // this.#$.category.appendChild(elem);
+    }
+
+    _onConceptsLoadCompleted(concepts) {
+        this.#renderItems(concepts);
+        this.#renderItems = undefined;
     }
 
     attachClickEventToElement(eventHandler) {
 
     }
 
-    _onCategoryClick(id) {
-
+    getItems = (id, renderItems) => {
+        this.#eventManager.dispatch('loadConcepts', id)
+        this.#renderItems = renderItems;
     }
 
     renderConceptDescription() {

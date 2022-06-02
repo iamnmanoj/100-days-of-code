@@ -13,8 +13,4 @@ export class EventManager {
             subscribers.forEach(eventHandler => eventHandler(data))
         }
     }
-
-    off() {
-        //pending implementation
-    }
 }

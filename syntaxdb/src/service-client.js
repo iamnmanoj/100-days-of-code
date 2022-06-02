@@ -1,5 +1,6 @@
 export class ServiceLayer {
     #baseUrl;
+    #conceptsCache = new Map();
 
     constructor(baseUrl) {
         this.#baseUrl = baseUrl;
@@ -16,9 +17,15 @@ export class ServiceLayer {
     }
 
     async fetchConceptsByLanguageAndId(language, id, requestOptions) {
+        const cachedData = this.#conceptsCache.get(id.toString());
+        if (cachedData) {
+            return cachedData;
+        }
         let response = await this.#fetchData(`${language}/categories/${id}/concepts`, requestOptions);
         response = await response.json();
-        return this.normaliseConcepts(response);
+        response = this.normaliseConcepts(response);
+        this.#conceptsCache.set(id.toString(), response);
+        return response;
     }
 
     async fetchAllConceptsByLanguage(language) {

@@ -7,8 +7,27 @@
   margin-top: 60px;
 }
 
-.container {
+.root {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 240px 1fr;
   column-gap: 3px;
+}
+
+.category {
+  background-color: #673ab7;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.conceptsContainer {
+  text-align: start;
+  margin-left: 20px;
+  padding: 10px 0;
+}
+
+.concept {
+  background-color: #d3bff6;
+  padding: 10px;
+  border-bottom: 1px solid #673ab7;
 }

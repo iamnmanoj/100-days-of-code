@@ -4,17 +4,21 @@ import { EventManager } from './event-manager';
 import { ViewManager } from './view';
 
 
-const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
+// const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
 
-async function test() {
-    const response = await serviceClient.fetchCategoriesByLanguage('javascript');
-    console.log(response);
+// async function test() {
+//     const response = await serviceClient.fetchCategoriesByLanguage('javascript');
+//     console.log(response);
 
-    const response1 = await serviceClient.fetchConceptsByLanguageAndId('javascript', '33');
-    console.log(response1);
-}
+//     const response1 = await serviceClient.fetchConceptByLanguageAndId('javascript', '33');
+//     await serviceClient.fetchConceptByLanguageAndId('javascript', '33')
+//     await serviceClient.fetchConceptByLanguageAndId('javascript', '33')
+//     await serviceClient.fetchConceptByLanguageAndId('javascript', '33')
+//     await serviceClient.fetchConceptByLanguageAndId('javascript', '33')
+//     console.log(response1);
+// }
 
-test();
+// test();
 
 export class App {
     #eventManager;
@@ -31,13 +35,12 @@ export class App {
     boot() {
         this.#initEvents();
         this.#eventManager.dispatch('uiboot');
-        this.#eventManager.dispatch('loadConcepts');
     }
 
     #initEvents() {
         this.#eventManager.on('languageChange', (language) => this.#onLanguageChange(language));
-        this.#eventManager.on('conceptChange');
         this.#eventManager.on('loadCategories', () => this.getCategoriesByLanguage());
+        this.#eventManager.on('loadConcepts', (id) => this.getConceptsByLanguageAndId(id))
     }
 
     #onLanguageChange(language) {
@@ -49,8 +52,9 @@ export class App {
         this.#eventManager.dispatch('loadCategoriesCompleted', categories)
     }
 
-    getConceptsByLanguage() {
-
+    async getConceptsByLanguageAndId(id) {
+        const concepts = await this.#serviceLayer.fetchConceptsByLanguageAndId(this.#language, id);
+        this.#eventManager.dispatch('loadConceptCompleted', concepts);
     }
 }
 
