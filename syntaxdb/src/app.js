@@ -4,17 +4,17 @@ import { EventManager } from './event-manager';
 import { ViewManager } from './view';
 
 
-// const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
+const serviceClient = new ServiceLayer('https://syntaxdb.com/api/v1/languages');
 
-// async function test() {
-//     const response = await serviceClient.fetchCategoriesByLanguage('javascript');
-//     console.log(response);
+async function test() {
+    const response = await serviceClient.fetchCategoriesByLanguage('javascript');
+    console.log(response);
 
-//     const response1 = await serviceClient.fetchConceptsByLanguageAndId('javascript', '33');
-//     console.log(response1);
-// }
+    const response1 = await serviceClient.fetchConceptsByLanguageAndId('javascript', '33');
+    console.log(response1);
+}
 
-// test();
+test();
 
 export class App {
     #eventManager;
