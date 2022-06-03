@@ -1,17 +1,21 @@
 import { createElement } from './utils';
 
-export function Collapsible(props) {
+export function CollapsibleItem(props) {
     const { root, label, id, onClick, onExpand } = props;
     let isExpanded = false;
-    const elem = createElement('div', { class: 'container' });
-    const categoryElem = createElement('div', { class: 'category' });
-    const conceptsContainer = createElement('div', { class: 'conceptsContainer' });
-    categoryElem.textContent = label;
-    elem.appendChild(categoryElem);
-    elem.appendChild(conceptsContainer);
-    root.appendChild(elem);
 
-    categoryElem.addEventListener('click', _onClick)
+    this.$ = {
+        root: createElement('div', { class: 'container' }),
+        category: createElement('div', { class: 'category' }),
+        conceptContainer: createElement('div', { class: 'conceptsContainer' })
+    }
+
+    this.$.category.textContent = label;
+    this.$.root.appendChild(this.$.category);
+    this.$.root.appendChild(this.$.conceptContainer);
+    root.appendChild(this.$.root);
+
+    this.$.category.addEventListener('click', _onClick)
 
     function _onClick() {
         if (isExpanded) {
@@ -22,16 +26,16 @@ export function Collapsible(props) {
         toggleisExpanded();
     }
 
-    function expand(items) {
-        Object.keys(items).forEach(itemName => {
+    const expand = (items) => {
+        Object.keys(items).forEach((itemName) => {
             const itemElem = createElement('div', { class: 'concept' });
             itemElem.textContent = itemName;
-            conceptsContainer.appendChild(itemElem);
+            this.$.conceptContainer.appendChild(itemElem);
         })
     }
 
-    function collapse() {
-        conceptsContainer.innerHTML = '';
+    const collapse = () => {
+        this.$.conceptContainer.innerHTML = '';
         toggleisExpanded();
     }
 

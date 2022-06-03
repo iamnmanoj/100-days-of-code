@@ -1,5 +1,5 @@
 import { createElement } from './utils';
-import { Collapsible } from './custom-elements';
+import { CollapsibleItem } from './custom-elements';
 
 export class ViewManager {
 
@@ -56,7 +56,7 @@ export class ViewManager {
             label: category.category_name,
             id: category.id
         };
-        new Collapsible(props);
+        new CollapsibleItem(props);
         // this.#$.category.appendChild(elem);
     }
 
